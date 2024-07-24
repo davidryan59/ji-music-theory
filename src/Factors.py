@@ -259,5 +259,8 @@ class Factors:
         return f"{note_name}{accs3}{accs5}{oct2}{commas_p}"
 
 
+    # TODO: function to turn a notation back into a Factors object
+
+
 NOTE_FS = [Factors(num=item[0], denom=item[1]) for item in FRACTIONS_NOTES]
 SHARP_FS = Factors(num=FRACTION_SHARP[0], denom=FRACTION_SHARP[1]) 
