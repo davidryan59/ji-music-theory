@@ -84,6 +84,30 @@ class Factors:
         return Factors(factors=self.get_factor_dict())
 
 
+    # Check for equality, which requires:
+    # 1. Same primes as keys
+    # 2. Same powers for each prime
+    def __eq__(self, fs):
+        d1 = self.get_factor_dict()
+        d2 = fs.get_factor_dict()
+        ks1 = set(d1.keys())
+        ks2 = set(d2.keys())
+        # 1. Are the primes the same?
+        if ks1 == ks2:
+            for key in ks1:
+                # 2. Is every prime power the same?
+                if d1.get(key, 0) != d2.get(key, 0):
+                    return False
+            return True
+        return False
+
+
+    # Need custom hash. Allows sets of Factor
+    # TODO: change this implementation for something that works with big numbers
+    def __hash__(self):
+        return hash(f"{self.get_fraction()}")
+
+
     # Return string representation of this object
     def __repr__(self):
         return f"Factors {self.get_factor_dict()}"
