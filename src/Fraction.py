@@ -16,8 +16,8 @@ class Fraction:
         self.denom = int(denom / _gcd)
 
 
-    def __repr__(self):
-        if self.denom == 1:
+    def __repr__(self, shorten: bool=True):
+        if self.denom == 1 and shorten:
             return f"{self.num}"
         else:
             return f"{self.num}/{self.denom}"
