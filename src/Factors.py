@@ -122,6 +122,22 @@ class Factors:
         return res
 
 
+    def log2(self):
+        res = 0
+        for prime, pow in self.get_factor_items():
+            res += pow * math.log(prime)/L2
+
+        return res
+
+
+    def __lt__(self, fs):
+        return self.log2() < fs.log2()
+
+
+    def __le__(self, fs):
+        return self.log2() <= fs.log2()
+
+
     # Return new Factors equal to self / fs
     def __truediv__(self, fs):
         res = self.copy()
