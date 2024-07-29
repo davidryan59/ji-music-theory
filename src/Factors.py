@@ -270,17 +270,30 @@ class Factors:
                 accs5 = CHAR_5_DOWN * -pow5
 
         commas_p = fs5c.get_fraction()
-        commas_p = "" if fs5c.count_prime_factors() == 0 else f" [{commas_p}]"
+        p_commas_num = commas_p.num
+        p_commas_denom = commas_p.denom
+        p_commas_txt = "" if fs5c.count_prime_factors() == 0 else f" [{commas_p}]"
 
-        return note_name, oct2, accs3, accs5, commas_p
+        return note_name, oct2, accs3, accs5, p_commas_num, p_commas_denom, p_commas_txt
 
 
     # Return a musical notation string for this object
     # TODO: allow various formatting options here
     # - positioning of the commas_p text
     def get_ji_notation(self) -> str:
-        note_name, oct2, accs3, accs5, commas_p = self.get_notation_data()
-        return f"{note_name}{accs3}{accs5}{oct2}{commas_p}"
+        note_name, oct2, accs3, accs5, _, _, p_commas_txt = self.get_notation_data()
+        return f"{note_name}{accs3}{accs5}{oct2}{p_commas_txt}"
+
+
+    # Return a musical notation string for this object
+    # TODO: allow various formatting options here
+    # - positioning of the commas_p text
+    def get_pitch_class_notation(self) -> str:
+        note_name, _, accs3, accs5, p_commas_num, p_commas_denom, p_commas_txt = self.get_notation_data()
+        pc_num_txt = "" if p_commas_num < 5 else f"~{p_commas_num}"
+        pc_denom_txt = "" if p_commas_denom < 5 else f"_{p_commas_denom}"
+        o_txt = "" if len(pc_num_txt) + len(pc_denom_txt) < 1 else "|"
+        return f"{note_name}{accs3}{accs5}{pc_num_txt}{pc_denom_txt}{o_txt}"
 
 
     # TODO: function to turn a notation back into a Factors object
