@@ -1,5 +1,8 @@
+import math
 from src.functions import gcd
 
+
+L2 = math.log(2)
 
 class Fraction:
 
@@ -21,6 +24,19 @@ class Fraction:
             return f"{self.num}"
         else:
             return f"{self.num}/{self.denom}"
+
+
+
+    def value(self):
+        return self.num / self.denom
+
+
+    def cents(self, dps: int=2):
+        res = 1200 * math.log(self.value()) / L2
+        if dps < 1:
+            return int(res)
+        else:
+            return round(res, dps)
 
 
     # TODO: add __mul__, __truediv__, etc
