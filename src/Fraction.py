@@ -7,7 +7,12 @@ L2 = math.log(2)
 class Fraction:
 
     # TODO: add some different methods of initialisation
-    def __init__(self, num: int, denom: int) -> None:
+    def __init__(
+            self,
+            num: int,
+            denom: int,
+            shorten: bool=True,  # Omit /1 if an integer
+        ) -> None:
         if type(num) != int or type(denom) != int:
             raise Exception("Cannot initialise Fraction on non-integer numerator or denominator")
 
@@ -17,10 +22,11 @@ class Fraction:
         _gcd = gcd(num, denom)
         self.num = int(num / _gcd)  # int shouldn't change the result, but does change the type from float to int
         self.denom = int(denom / _gcd)
+        self.shorten = shorten
 
 
-    def __repr__(self, shorten: bool=True):
-        if self.denom == 1 and shorten:
+    def __repr__(self):
+        if self.denom == 1 and self.shorten:
             return f"{self.num}"
         else:
             return f"{self.num}/{self.denom}"
