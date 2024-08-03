@@ -171,7 +171,7 @@ class Factors:
 
 
     # Return a Fraction object that has equal numerator and denominator to this object
-    def get_fraction(self) -> Fraction:
+    def get_fraction(self, shorten: bool=True) -> Fraction:
         num = 1
         denom = 1
         for prime, power in self.get_factor_items():
@@ -180,7 +180,7 @@ class Factors:
             elif power < 0:
                 denom *= prime ** -power
 
-        return Fraction(num, denom)
+        return Fraction(num=num, denom=denom, shorten=shorten)
 
 
     # Return a Factors object representing 1/1
